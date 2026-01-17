@@ -33,6 +33,7 @@ If query has row info then it should bring that table chunks
 ## End-to-end flow
 
 Upload File -> Text/Table(Chunks) → Embedding model → Vector → Store in PostgreSQL (pgvector)
+
 Search Query -> Text → Embedding model → Vector → PostgreSQL (pgvector) -> Similarity search
 
 ## Libraries Used
