@@ -1,0 +1,13 @@
+python-multipart
+pydantic
+pydantic-settings
+fastapi
+asyncpg
+uvicorn
+SQLAlchemy
+pandas
+pdfplumber
+aiofiles
+pgvector
+tabulate
+google-genai

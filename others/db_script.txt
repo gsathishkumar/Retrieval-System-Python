@@ -1,0 +1,50 @@
+CREATE USER SATHISH WITH ENCRYPTED PASSWORD 'secret_password';
+CREATE DATABASE vector_db OWNER sathish;
+GRANT ALL PRIVILEGES ON DATABASE vector_db TO sathish;
+
+CREATE TYPE DATAFORMAT AS ENUM ('TEXT', 'TABLE');
+\dT+ DATAFORMAT
+
+CREATE TABLE CHUNK_INFO (
+    chunk_id SERIAL PRIMARY KEY,
+	file_name VARCHAR(50) NOT NULL,
+	page_no INTEGER NOT NULL,
+    content TEXT NOT NULL,
+	content_type DATAFORMAT NOT NULL,
+    embedding VECTOR(1024) NULL
+);
+\d+ CHUNK_INFO
+
+select file_name, page_no, content_type from chunk_info;
+
+ALTER SEQUENCE chunk_info_chunk_id_seq RESTART WITH 1;
+TRUNCATE chunk_info;
+
+
+CREATE TYPE FILESTATUS AS ENUM ('READY_TO_PROCESS','IN_PROGRESS', 'COMPLETED','FAILED');
+\dT+ FILESTATUS
+
+CREATE TABLE FILE_INFO (
+    file_id SERIAL PRIMARY KEY,
+	file_name VARCHAR(50) UNIQUE NOT NULL,
+    file_status FILESTATUS NOT NULL,
+    file_err_msg TEXT NULL,
+    file_uploaded_by VARCHAR(20) NOT NULL,
+    file_upload_time TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+\d+ FILE_INFO
+
+select file_name, file_status, file_err_msg from file_info;
+
+ALTER SEQUENCE file_info_file_id_seq RESTART WITH 1;
+TRUNCATE FILE_INFO;
+
+DROP TABLE CHUNKS;
+DROP TABLE FILE_INFO;
+
+# \l --> List of Databases
+# \d --> List Relations.
+# \dn --> List of schemas
+# \dt --> List Table
+# \c --> Current DB
+# \c <DB_NAME> --> Switch to New Database

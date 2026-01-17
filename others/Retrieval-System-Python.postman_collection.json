@@ -1,0 +1,98 @@
+{
+  "info": {
+    "_postman_id": "3960f114-2569-4969-a577-7e729b396cc1",
+    "name": "Retrieval-System-Python",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "19111140"
+  },
+  "item": [
+    {
+      "name": "Upload File",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "input_file",
+              "type": "file",
+              "uuid": "59b905ae-3ed1-4633-a88d-e74dd8f7e3d3",
+              "value": null
+            },
+            {
+              "key": "uploaded_by",
+              "value": "sathish",
+              "type": "text",
+              "uuid": "b28f064e-1369-47ed-8fe4-69ec42f823f1"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/data-ingest/upload-file",
+          "host": ["{{base_url}}"],
+          "path": ["data-ingest", "upload-file"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Process PDF files",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/data-ingest/process-files",
+          "host": ["{{base_url}}"],
+          "path": ["data-ingest", "process-files"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Search Text",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/query-processing/search-text?input_query=Security Incident Response",
+          "host": ["{{base_url}}"],
+          "path": ["query-processing", "search-text"],
+          "query": [
+            {
+              "key": "input_query",
+              "value": "Security Incident Response"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000/api/v1"
+    }
+  ]
+}
