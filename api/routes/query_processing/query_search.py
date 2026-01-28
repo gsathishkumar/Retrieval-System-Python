@@ -28,7 +28,7 @@ async def search_text(input_query: str,
 
   query_vector = vectors_list[0]
   stmt = (
-      select(ChunkInfo.file_name, ChunkInfo.page_no, ChunkInfo.content_type, ChunkInfo.content)
+      select(ChunkInfo.chunk_id, ChunkInfo.file_name, ChunkInfo.page_no, ChunkInfo.content_type, ChunkInfo.content)
       .order_by(ChunkInfo.embedding.cosine_distance(query_vector))
       .limit(5)
   )
@@ -37,6 +37,7 @@ async def search_text(input_query: str,
   for row in result.all():
     response.append(
       {
+          "chunk_id" : f'chunk_{row.chunk_id:02d}',
           "file_name" : row.file_name,
           "page_no": row.page_no,
           "content_type": row.content_type,
