@@ -30,7 +30,7 @@ async def search_text(input_query: str,
   stmt = (
       select(ChunkInfo.chunk_id, ChunkInfo.file_name, ChunkInfo.page_no, ChunkInfo.content_type, ChunkInfo.content)
       .order_by(ChunkInfo.embedding.cosine_distance(query_vector))
-      .limit(5)
+      .limit(20)
   )
   result = await session.execute(stmt)
   response = []
